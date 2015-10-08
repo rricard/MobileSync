@@ -1,0 +1,76 @@
+# # FileSystem Entity-Relation Diagram
+
+graph FileSystem {
+# ## General Config
+fontname = "Helvetica Neue"
+fontsize = 10
+
+node [
+  fontname = "Helvetica Neue"
+  fontsize = 10
+  shape = "record"
+]
+
+edge [
+  fontname = "Helvetica Neue"
+  fontsize = 10
+  weight = 0.1
+]
+
+# ## Entities
+FileTree
+
+FileDescriptor [
+  label = "{FileDescriptor|name:string
+                           size:integer
+                           createdAt:date
+                           updatedAt:date
+                           isDirectory:boolean}"
+]
+
+Permission [
+  label = "{Permission|type:enum[user\|group\|all]
+                       canRead:boolean
+                       canWrite:boolean}"
+]
+
+User [
+  label = "{User|name:string}"
+]
+
+Group [
+  label = "{Group|name:string}"
+]
+
+# ## Relations
+
+FileTree -- FileDescriptor [
+  headlabel = "1 \n root"
+]
+
+FileDescriptor -- FileDescriptor [
+  taillabel = "0..1 \n parent"
+  headlabel = "0..* \n children"
+]
+
+FileDescriptor -- Permission [
+  taillabel = "1..* \n files"
+  headlabel = "1 \n permission"
+]
+
+Permission -- User [
+  taillabel = "0..* permissions"
+  headlabel = "0..1 user"
+]
+
+Permission -- Group [
+  taillabel = "0..* permissions"
+  headlabel = "0..1 group"
+]
+
+User -- Group [
+  taillabel = "1..* users"
+  headlabel = "0..* groups"
+]
+
+}
