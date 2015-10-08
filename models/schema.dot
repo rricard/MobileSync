@@ -1,0 +1,45 @@
+# # GraphQL Schema
+
+digraph GraphQLSchema {
+# ## General Config
+fontname = "Helvetica Neue"
+fontsize = 10
+
+node [
+  fontname = "Helvetica Neue"
+  fontsize = 10
+  shape = "record"
+]
+
+edge [
+  fontname = "Helvetica Neue"
+  fontsize = 10
+  weight = 0.1
+]
+
+Schema -> Query [label = "query"]
+Query -> "Node" [label = "node(id: ID!)"]
+Query -> File [label = "file(id: ID!)"]
+Query -> File [label = "root"]
+
+"Node" [
+  label = "{Node|id: ID!
+                 __typename: String!}"
+]
+
+File [
+  label="{File|id: ID!
+               name: String!
+               isDirectory: Boolean!
+               size: Int
+               url: String}"
+]
+File -> FileConnection [label = "children(...pagination)"]
+
+FileConnection [label= " {FileConnection|pageInfo: PageInfo!}"]
+FileConnection -> FileEdge [label = "edges"]
+
+FileEdge [label = "{FileEdge|cursor: String!}"]
+FileEdge -> File [label = "node"]
+
+}
