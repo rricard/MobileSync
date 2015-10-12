@@ -27,11 +27,11 @@ describe("fileSystem", function() {
     });
 
     it("should stat a dir", function*() {
-      var dir = yield fileSystem.getFile("/src/__tests__");
+      var dir = yield fileSystem.getFile("/src/tests");
       if(!dir) {
         throw new Error();
       }
-      assert.equal(dir.name, "__tests__");
+      assert.equal(dir.name, "tests");
       assert.equal(dir.isDirectory, true);
     });
   });
@@ -54,7 +54,7 @@ describe("fileSystem", function() {
       }
       assert.equal(dirls.length, 2);
       assert(dirls.indexOf("/src/hello.js") > -1);
-      assert(dirls.indexOf("/src/__tests__") > -1);
+      assert(dirls.indexOf("/src/tests") > -1);
     });
   });
 });

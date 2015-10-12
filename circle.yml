@@ -8,5 +8,6 @@ dependencies:
 test:
   override:
     - ./flow/flow || echo "Ignored because of RN typechecking issues."
-    - npm test
+    - npm run data-test
+    - npm run ui-test
     - npm run lint
