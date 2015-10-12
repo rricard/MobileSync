@@ -19,7 +19,7 @@ describe("GraphQL schema", function() {
       }
 
       fragment FileChildren on File {
-        children {
+        children(last: 1) {
           edges {
             node {
               ...FileInfo
@@ -54,8 +54,8 @@ describe("GraphQL schema", function() {
     if(!rdir ||
       !rdir.children ||
       !rdir.children.edges ||
-      !rdir.children.edges[2] ||
-      !rdir.children.edges[2].node) {
+      !rdir.children.edges[0] ||
+      !rdir.children.edges[0].node) {
       throw new Error("No root data");
     }
     const idir = gqlResult.data.imagesDir;
@@ -70,10 +70,10 @@ describe("GraphQL schema", function() {
     assert(rdir.id !== "/");
     assert.equal(rdir.name, "Root");
     assert.equal(rdir.isDirectory, true);
-    assert.equal(rdir.children.edges.length, 3);
-    assert.equal(rdir.children.edges[2].node.name, "test.md");
-    assert.equal(rdir.children.edges[2].node.mime, "text/x-markdown");
-    assert.equal(rdir.children.edges[2].node.size, 66);
+    assert.equal(rdir.children.edges.length, 1);
+    assert.equal(rdir.children.edges[0].node.name, "test.md");
+    assert.equal(rdir.children.edges[0].node.mime, "text/x-markdown");
+    assert.equal(rdir.children.edges[0].node.size, 66);
 
     assert(idir.id !== "/images");
     assert.equal(idir.name, "images");
