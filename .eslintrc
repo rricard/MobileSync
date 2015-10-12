@@ -8,5 +8,6 @@
   },
   "ecmaFeatures": {
     "jsx": true
-  }
+  },
+  "plugins": ["flowtype"]
 }
