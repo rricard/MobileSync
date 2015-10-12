@@ -1,6 +1,7 @@
 # MobileSync
 
 [![Circle CI](https://circleci.com/gh/rricard/MobileSync/tree/master.svg?style=svg)](https://circleci.com/gh/rricard/MobileSync/tree/master)
+[![Code Climate](https://codeclimate.com/github/rricard/MobileSync/badges/gpa.svg)](https://codeclimate.com/github/rricard/MobileSync)
 
 React-Native application that uses GraphQL &amp; Relay to sync a filesystem
 
