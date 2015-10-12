@@ -25,6 +25,7 @@
 .*/react-native/node_modules/jest-cli/.*
 
 [include]
+flow-annotations/
 
 [libs]
 node_modules/react-native/Libraries/react-native/react-native-interface.js
