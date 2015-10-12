@@ -59,7 +59,14 @@ function getFile(id: string): Promise<File> {
 
 function getChildrenIdsOfId(id: string): Promise<Array<string>> {
   return co(function*() {
-    const filenames = yield fs.readdirAsync(path.join(FS_PATH, id));
+    let filenames = [];
+    try {
+      filenames = yield fs.readdirAsync(path.join(FS_PATH, id));
+    } catch(e) {
+      if(!/ENOTDIR/.test(e.message)) {
+        throw e;
+      }
+    }
     return (filenames || []).map(fn => path.join(id, fn));
   });
 }

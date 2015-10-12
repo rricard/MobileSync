@@ -18,17 +18,24 @@ var {
   globalIdField,
   connectionDefinitions,
   connectionArgs,
-  connectionFromArray
+  connectionFromPromisedArray
 } = require('graphql-relay');
+
+var {
+  getFile,
+  getChildrenIdsOfId
+} = require('./file-system.js');
 
 var {nodeInterface, nodeField} = nodeDefinitions(
   (globalId) => {
     var {type, id} = fromGlobalId(globalId);
-    return {id: id}; // TODO
+    return getFile(id);
   },
   (obj) => {
-    // TODO: give the possibility to support other types
-    return FileType;
+    if(obj.id && obj.name && obj.isDirectory) {
+      return FileType;
+    }
+    return null;
   }
 );
 
@@ -40,35 +47,36 @@ var FileType = new GraphQLObjectType({
     name: {
       type: new GraphQLNonNull(GraphQLString),
       description: "The file's name in the FS",
-      resolve: (file) => "TODO" // TODO
+      resolve: (file) => file.name
     },
     isDirectory: {
       type: new GraphQLNonNull(GraphQLBoolean),
       description: "Defines if the file descriptor is in fact a directory",
-      resolve: (file) => false // TODO
+      resolve: (file) => file.isDirectory
     },
     size: {
       type: GraphQLInt,
       description: "Defines the size (in bytes) of a given file",
-      resolve: (file) => 0 // TODO
+      resolve: (file) => file.size
     },
     mime: {
       type: GraphQLString,
       description: "Defines the kind of file descriptor via a MIME type",
-      resolve: (file) => "text/plain" // TODO
+      resolve: (file) => file.mime
     },
     url: {
       type: GraphQLString,
       description: "Defines the url of the file in order to fetch it via HTTP",
-      resolve: (file) => "http://example.com" // TODO
+      resolve: (file) => file.url
     },
     children: {
       type: FileConnection,
       description: `If the file descriptor is a directory, gets its children.
                     It will be empty otherwise.`,
       args: connectionArgs,
-      resolve: (dir, args) => connectionFromArray(
-        [], // TODO
+      resolve: (dir, args) => connectionFromPromisedArray(
+        getChildrenIdsOfId(dir.id)
+        .then(ids => Promise.all(ids.map(id => getFile(id)))),
         args
       )
     }
@@ -88,7 +96,7 @@ var MobileSyncGraphQLSchema = new GraphQLSchema({
       root: {
         type: FileType,
         description: "Gets the root element of the file system",
-        resolve: (root) => ({id: "/"}) // TODO
+        resolve: (root) => getFile("/")
       },
       file: {
         type: FileType,
@@ -99,7 +107,7 @@ var MobileSyncGraphQLSchema = new GraphQLSchema({
             description: "The file's id to fetch"
           }
         },
-        resolve: (root, {id}) => ({id: id}) // TODO
+        resolve: (root, {id}) => getFile(id)
       }
     }
   })

@@ -56,5 +56,13 @@ describe("fileSystem", function() {
       assert(dirls.indexOf("/src/hello.js") > -1);
       assert(dirls.indexOf("/src/tests") > -1);
     });
+
+    it("should list files as empty", function*() {
+      var dirls = yield fileSystem.getChildrenIdsOfId("/test.md");
+      if(!dirls) {
+        throw new Error();
+      }
+      assert.equal(dirls.length, 0);
+    });
   });
 });
