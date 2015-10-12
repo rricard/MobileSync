@@ -107,7 +107,7 @@ var MobileSyncGraphQLSchema = new GraphQLSchema({
             description: "The file's id to fetch"
           }
         },
-        resolve: (root, {id}) => getFile(id)
+        resolve: (root, {id}) => getFile(fromGlobalId(id).id)
       }
     }
   })
