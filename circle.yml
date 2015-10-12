@@ -3,7 +3,7 @@ machine:
     version: 4.1.2
 dependencies:
   pre:
-    - wget --output-document=flow.zip https://facebook.github.io/flow/downloads/flow-linux64-latest.zip
+    - wget --output-document=flow.zip https://github.com/facebook/flow/releases/download/v0.14.0/flow-linux64-v0.14.0.zip
     - unzip flow.zip
 test:
   override:

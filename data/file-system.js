@@ -3,7 +3,7 @@
 
 var bluebird = require("bluebird");
 var co = require("co");
-var fs = require("fs");
+var fs: any = require("fs");
 var path = require("path");
 var mime = require("mime");
 bluebird.promisifyAll(fs);

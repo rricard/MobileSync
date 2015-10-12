@@ -1,3 +1,6 @@
+"use strict";
+/* @flow */
+
 declare function describe(title: string, block: Function|Generator): void;
 declare function it(title: string, block?: Function|Generator): void;
 declare function before(block: Function|Generator): void;
