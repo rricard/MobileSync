@@ -3,9 +3,20 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
+    "start": "node_modules/react-native/packager/packager.sh",
+    "data-test": "mocha --recursive -r co-mocha data/tests",
+    "ui-test": "jest",
+    "test": "npm run data-test && npm run ui-test",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "react-native": "^0.11.4"
+    "react-native": "^0.12.0"
+  },
+  "devDependencies": {
+    "co-mocha": "^1.1.2",
+    "eslint": "^1.6.0",
+    "eslint-plugin-flowtype": "^1.0.0",
+    "jest-cli": "^0.5.10",
+    "mocha": "^2.3.3"
   }
 }
