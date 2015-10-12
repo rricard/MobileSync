@@ -9,10 +9,11 @@
     "test": "npm run data-test && npm run ui-test"
   },
   "dependencies": {
-    "react-native": "^0.11.4"
+    "react-native": "^0.12.0"
   },
   "devDependencies": {
     "co-mocha": "^1.1.2",
+    "eslint": "^1.6.0",
     "jest-cli": "^0.5.10",
     "mocha": "^2.3.3"
   }
