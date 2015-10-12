@@ -1,0 +1,9 @@
+dependencies:
+  pre:
+    - wget --output-document=flow.zip https://facebook.github.io/flow/downloads/flow-linux64-latest.zip
+    - unzip flow.zip
+test:
+  override:
+    - ./flow/flow || echo "Ignored because of RN typechecking issues."
+    - npm test
+    - npm run lint

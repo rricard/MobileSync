@@ -6,7 +6,8 @@
     "start": "node_modules/react-native/packager/packager.sh",
     "data-test": "mocha --recursive -r co-mocha data/tests",
     "ui-test": "jest",
-    "test": "npm run data-test && npm run ui-test"
+    "test": "npm run data-test && npm run ui-test",
+    "lint": "eslint ."
   },
   "dependencies": {
     "react-native": "^0.12.0"
