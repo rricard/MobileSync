@@ -29,7 +29,10 @@ var {
 var {nodeInterface, nodeField} = nodeDefinitions(
   (globalId) => {
     var {type, id} = fromGlobalId(globalId);
-    return getFile(id);
+    if(type === "File") {
+      return getFile(id);
+    }
+    return null;
   },
   (obj) => {
     if(obj.id && obj.name && obj.isDirectory) {
