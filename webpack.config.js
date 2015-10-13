@@ -10,7 +10,7 @@ module.exports = {
     "index.android": ["./src/index.android.js"]
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
   module: {
@@ -20,7 +20,9 @@ module.exports = {
         exclude: /node_modules/,
         loader: ['babel-loader'],
         query: {
-          optional: 'runtime'
+          stage: 0,
+          optional: 'runtime',
+          plugins: ['./build-tools/babelRelayPlugin.js']
         }
       }
     ]
