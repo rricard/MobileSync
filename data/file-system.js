@@ -1,11 +1,12 @@
 /* @flow */
 "use strict";
 
-var bluebird = require("bluebird");
-var co = require("co");
-var fs: any = require("fs");
-var path = require("path");
-var mime = require("mime");
+import bluebird from "bluebird";
+import co from "co";
+// Hack to make flow ignore errors related to the promisification
+var fs:any = require("fs");
+import path from "path";
+import mime from "mime";
 bluebird.promisifyAll(fs);
 
 type File = {
@@ -47,7 +48,7 @@ function mapPathAndStatsToFile(
   };
 }
 
-function getFile(id: string): Promise<File> {
+export function getFile(id: string): Promise<File> {
   if(id === "/") {
     return Promise.resolve(ROOT_NODE);
   }
@@ -57,7 +58,7 @@ function getFile(id: string): Promise<File> {
   });
 }
 
-function getChildrenIdsOfId(id: string): Promise<Array<string>> {
+export function getChildrenIdsOfId(id: string): Promise<Array<string>> {
   return co(function*() {
     let filenames = [];
     try {
@@ -70,6 +71,3 @@ function getChildrenIdsOfId(id: string): Promise<Array<string>> {
     return (filenames || []).map(fn => path.join(id, fn));
   });
 }
-
-exports.getFile = getFile;
-exports.getChildrenIdsOfId = getChildrenIdsOfId;

@@ -1,29 +1,17 @@
 /* @flow */
 'use strict';
 
-var React = require('react-native');
-var {
+import {
+  Component
+} from "react";
+
+import {
   StyleSheet,
   Text,
-  View,
-} = React;
+  View
+} from "react-native";
 
-var App = React.createClass({
-  render: function() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          Common to iOS and Android
-        </Text>
-      </View>
-    );
-  }
-});
-
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -41,5 +29,22 @@ var styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+export default class App extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Welcome to React Native!
+        </Text>
+        <Text style={styles.instructions}>
+          Common to iOS and Android
+        </Text>
+      </View>
+    );
+  }
+}
+
+
 
 module.exports = App;

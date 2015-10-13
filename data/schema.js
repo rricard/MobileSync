@@ -1,7 +1,7 @@
 /* @flow */
 "use strict";
 
-var {
+import {
   graphql,
   GraphQLSchema,
   GraphQLObjectType,
@@ -10,25 +10,25 @@ var {
   GraphQLNonNull,
   GraphQLInt,
   GraphQLID
-} = require('graphql');
+} from 'graphql';
 
-var {
+import {
   nodeDefinitions,
   fromGlobalId,
   globalIdField,
   connectionDefinitions,
   connectionArgs,
   connectionFromPromisedArray
-} = require('graphql-relay');
+} from 'graphql-relay';
 
-var {
+import {
   getFile,
   getChildrenIdsOfId
-} = require('./file-system.js');
+} from './file-system.js';
 
-var {nodeInterface, nodeField} = nodeDefinitions(
+const {nodeInterface, nodeField} = nodeDefinitions(
   (globalId) => {
-    var {type, id} = fromGlobalId(globalId);
+    const {type, id} = fromGlobalId(globalId);
     if(type === "File") {
       return getFile(id);
     }
@@ -42,7 +42,7 @@ var {nodeInterface, nodeField} = nodeDefinitions(
   }
 );
 
-var FileType = new GraphQLObjectType({
+const FileType = new GraphQLObjectType({
   name: "File",
   description: "Represents a file in the FileSystem",
   fields: () => ({
@@ -87,10 +87,10 @@ var FileType = new GraphQLObjectType({
   interfaces: [nodeInterface]
 });
 
-var {connectionType: FileConnection} =
+const {connectionType: FileConnection} =
   connectionDefinitions({name: 'File', nodeType: FileType});
 
-var MobileSyncGraphQLSchema = new GraphQLSchema({
+const MobileSyncGraphQLSchema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'RootQueryType',
     description: "Read-Only access to the file system",
@@ -116,4 +116,4 @@ var MobileSyncGraphQLSchema = new GraphQLSchema({
   })
 });
 
-module.exports = MobileSyncGraphQLSchema;
+export default MobileSyncGraphQLSchema;

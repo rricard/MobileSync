@@ -1,11 +1,10 @@
 /* @flow */
 'use strict';
 
-var React = require('react-native');
-var {
+import {
   AppRegistry
-} = React;
+} from 'react-native';
 
-var App = require('./components/App.js');
+import App from './components/App.js';
 
 AppRegistry.registerComponent('MobileSync', () => App);
