@@ -1,6 +1,8 @@
 /* @flow */
 'use strict';
 
+require('react-native-browser-polyfill');
+
 import {
   AppRegistry
 } from 'react-native';
