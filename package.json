@@ -3,13 +3,25 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh",
-    "data-test": "mocha --recursive -r co-mocha data/tests",
+    "data-start": "node data/index.js",
+    "ui-start": "node_modules/react-native/packager/packager.sh",
+    "start": "npm run data-start & npm run ui-start",
+    "data-develop": "nodemon data/index.js",
+    "develop": "npm run data-develop & npm run ui-start",
+    "data-test": "mocha --compilers js:babel/register --recursive -r co-mocha data/tests",
     "ui-test": "jest",
     "test": "npm run data-test && npm run ui-test",
     "lint": "eslint ."
   },
   "dependencies": {
+    "babel": "^5.8.23",
+    "bluebird": "^2.10.2",
+    "co": "^4.6.0",
+    "express": "^4.13.3",
+    "express-graphql": "^0.4.0",
+    "graphql": "^0.4.7",
+    "graphql-relay": "^0.3.2",
+    "mime": "^1.3.4",
     "react-native": "^0.12.0"
   },
   "devDependencies": {
@@ -17,6 +29,7 @@
     "eslint": "^1.6.0",
     "eslint-plugin-flowtype": "^1.0.0",
     "jest-cli": "^0.5.10",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "nodemon": "^1.7.1"
   }
 }

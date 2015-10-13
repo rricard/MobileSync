@@ -5,6 +5,41 @@
 
 React-Native application that uses GraphQL &amp; Relay to sync a filesystem
 
+## Install
+
+```
+npm i -g react-native-cli
+git clone git@github.com:rricard/MobileSync.git
+cd MobileSync
+npm i
+```
+
+## Run
+
+```
+npm start # production
+npm run develop # development
+```
+
+And then, in an another terminal:
+
+```
+react-native run-android
+```
+
+Or you can build the project in XCode.
+
+## Test & contribute
+
+```
+flow
+npm test
+npm run lint
+```
+
+Don't forget to check those before sending a PR. Note that flow checks failing
+inside React Native are OK.
+
 ## Architecture
 
 MobileSync is broke down in two dependent parts: the GraphQL file server and the
