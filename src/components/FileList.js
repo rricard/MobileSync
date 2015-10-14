@@ -10,11 +10,13 @@ import {
   ListView
 } from "react-native";
 
+import Relay from "react-relay";
+
 type FileListProps = {
   file: any
 };
 
-export default class FileList extends Component {
+class FileList extends Component {
   constructor(props: FileListProps) {
     super(props);
     this.state = {
@@ -40,3 +42,23 @@ export default class FileList extends Component {
     );
   }
 }
+
+export default Relay.createContainer(FileList, {
+  fragments: {
+    file: () => Relay.QL`
+      fragment on File {
+        id
+        name
+
+        children {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
+      }
+    `
+  }
+});

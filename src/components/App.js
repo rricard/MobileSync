@@ -25,7 +25,10 @@ export default class App extends Component {
         renderScene={(route, navigator) => (
           <RootContainer
             Component={FileList}
-            route={route ? new DirectoryRoute(route) : new RootRoute()}/>
+            route={route ? new DirectoryRoute(route) : new RootRoute()}
+            renderFetched={(data) => (
+              <FileList navigator={navigator} {...data} />
+            )}/>
         )}/>
     );
   }

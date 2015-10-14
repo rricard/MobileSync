@@ -3,6 +3,8 @@
 
 import Relay from "react-relay";
 
-Relay.injectNetworkLayer(
-  new Relay.DefaultNetworkLayer('http://localhost:8000/graphql')
-);
+export default function initRelayNetworking() {
+  Relay.injectNetworkLayer(
+    new Relay.DefaultNetworkLayer('http://localhost:8000/graphql')
+  );
+}
