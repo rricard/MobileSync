@@ -2,12 +2,9 @@
 'use strict';
 
 import {
-  Component
-} from "react";
-
-import {
   Text,
-  ListView
+  ListView,
+  Component
 } from "react-native";
 
 import Relay from "react-relay";
@@ -50,7 +47,7 @@ export default Relay.createContainer(FileList, {
         id
         name
 
-        children {
+        children(first: 10) {
           edges {
             node {
               id

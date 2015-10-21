@@ -2,16 +2,11 @@
 'use strict';
 
 import {
-  Component
-} from "react";
-
-import {
+  Component,
   Navigator
 } from "react-native";
 
-import {
-  RootContainer
-} from "react-relay";
+import Relay from "react-relay";
 
 import FileList from "./FileList.js";
 import DirectoryRoute from "../routes/DirectoryRoute.js";
@@ -23,12 +18,9 @@ export default class App extends Component {
       <Navigator
         initialRoute={null}
         renderScene={(route, navigator) => (
-          <RootContainer
+          <Relay.RootContainer
             Component={FileList}
-            route={route ? new DirectoryRoute(route) : new RootRoute()}
-            renderFetched={(data) => (
-              <FileList navigator={navigator} {...data} />
-            )}/>
+            route={route ? new DirectoryRoute(route) : new RootRoute()}/>
         )}/>
     );
   }
