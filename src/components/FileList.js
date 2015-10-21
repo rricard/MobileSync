@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import {
+import React, {
   Text,
   ListView,
   Component

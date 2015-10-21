@@ -15,7 +15,6 @@ const inlineRequires = require('fbjs-scripts/babel/inline-requires');
 const babelRelayPlugin = __dirname + "/babelRelayPlugin.js";
 
 function transform(src, filename, options) {
-  console.log(babelRelayPlugin)
   const plugins = [babelRelayPlugin];
 
   if (process.env.NODE_ENV === 'production') {
