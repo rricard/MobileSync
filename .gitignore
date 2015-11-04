@@ -30,3 +30,7 @@ android/.gradle
 #
 node_modules/
 npm-debug.log
+
+# Relay
+#
+data/schema.json

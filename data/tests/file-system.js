@@ -1,14 +1,17 @@
 "use strict";
 /* @flow */
 
-var assert = require("assert");
+import assert from "assert";
 
-var fileSystem = require("../file-system.js");
+import {
+  getFile,
+  getChildrenIdsOfId
+} from "../file-system.js";
 
 describe("fileSystem", function() {
   describe("getFile", function() {
     it("should return the root", function*() {
-      var root = yield fileSystem.getFile("/");
+      var root = yield getFile("/");
       if(!root) {
         throw new Error();
       }
@@ -16,7 +19,7 @@ describe("fileSystem", function() {
     });
 
     it("should stat a file", function*() {
-      var file = yield fileSystem.getFile("/test.md");
+      var file = yield getFile("/test.md");
       if(!file) {
         throw new Error();
       }
@@ -27,7 +30,7 @@ describe("fileSystem", function() {
     });
 
     it("should stat a dir", function*() {
-      var dir = yield fileSystem.getFile("/src/tests");
+      var dir = yield getFile("/src/tests");
       if(!dir) {
         throw new Error();
       }
@@ -38,7 +41,7 @@ describe("fileSystem", function() {
 
   describe("getChildrenIdsOfId", function() {
     it("should list the root", function*() {
-      var dirls = yield fileSystem.getChildrenIdsOfId("/");
+      var dirls = yield getChildrenIdsOfId("/");
       if(!dirls) {
         throw new Error();
       }
@@ -48,7 +51,7 @@ describe("fileSystem", function() {
     });
 
     it("should list subfolders", function*() {
-      var dirls = yield fileSystem.getChildrenIdsOfId("/src");
+      var dirls = yield getChildrenIdsOfId("/src");
       if(!dirls) {
         throw new Error();
       }
@@ -58,7 +61,7 @@ describe("fileSystem", function() {
     });
 
     it("should list files as empty", function*() {
-      var dirls = yield fileSystem.getChildrenIdsOfId("/test.md");
+      var dirls = yield getChildrenIdsOfId("/test.md");
       if(!dirls) {
         throw new Error();
       }

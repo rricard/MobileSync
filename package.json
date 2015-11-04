@@ -4,27 +4,36 @@
   "private": true,
   "scripts": {
     "data-start": "node data/index.js",
-    "ui-start": "node_modules/react-native/packager/packager.sh",
+    "ui-start": "./node_modules/react-native/packager/packager.sh --cleanCache --root ./src --transformer ./build-tools/packagerTransformer.js",
     "start": "npm run data-start & npm run ui-start",
     "data-develop": "nodemon data/index.js",
     "develop": "npm run data-develop & npm run ui-start",
     "data-test": "mocha --compilers js:babel/register --recursive -r co-mocha data/tests",
     "ui-test": "jest",
     "test": "npm run data-test && npm run ui-test",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "sh ./relay-patcher/patch.sh"
   },
   "dependencies": {
     "babel": "^5.8.23",
+    "babel-relay-plugin": "^0.3.0",
+    "babel-runtime": "^5.8.25",
     "bluebird": "^2.10.2",
     "co": "^4.6.0",
     "express": "^4.13.3",
     "express-graphql": "^0.4.0",
+    "fbjs-scripts": "^0.2.2",
     "graphql": "^0.4.7",
     "graphql-relay": "^0.3.2",
     "mime": "^1.3.4",
-    "react-native": "^0.12.0"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-native": "^0.13.0-rc",
+    "react-relay": "^0.4.0"
   },
   "devDependencies": {
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
     "co-mocha": "^1.1.2",
     "eslint": "^1.6.0",
     "eslint-plugin-flowtype": "^1.0.0",

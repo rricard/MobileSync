@@ -3,6 +3,8 @@
 
 require("babel/register");
 
+// Export the GraphQL Schema at launch
+require("./export-schema.js");
 var app = require('./app.js');
 
 const PORT = process.env.PORT || 8000;

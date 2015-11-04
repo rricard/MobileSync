@@ -1,16 +1,16 @@
 /* @flow */
 "use strict";
 
-var express = require('express');
-var graphqlHTTP = require('express-graphql');
+import express from 'express';
+import graphqlHTTP from 'express-graphql';
 
-var MobileSyncGraphQLSchema = require('./schema.js');
+import MobileSyncGraphQLSchema from './schema.js';
 
-var app = express();
+let app = express();
 
 app.use('/graphql', graphqlHTTP({
   schema: MobileSyncGraphQLSchema,
   graphiql: true
 }));
 
-module.exports = app;
+export default app;

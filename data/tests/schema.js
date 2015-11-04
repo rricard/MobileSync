@@ -1,10 +1,10 @@
 /* @flow */
 "use strict";
 
-var assert = require("assert");
+import assert from "assert";
 
-var {graphql} = require("graphql");
-var schema = require("../schema");
+import {graphql} from "graphql";
+import schema from "../schema";
 
 describe("GraphQL schema", function() {
   it("should let us do a complex read query", function*() {
