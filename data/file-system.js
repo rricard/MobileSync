@@ -9,6 +9,8 @@ import path from "path";
 import mime from "mime";
 bluebird.promisifyAll(fs);
 
+import {ROOT_NODE, FS_PATH} from "./config.js";
+
 type File = {
   id: string,
   name: string,
@@ -16,18 +18,6 @@ type File = {
   size?: number,
   mime?: string,
   url?: string
-};
-
-const FS_PATH = path.join(
-  __dirname,
-  "..",
-  process.env.FS_PATH || "./data/example"
-);
-
-const ROOT_NODE: File = {
-  id: "/",
-  name: "Root",
-  isDirectory: true
 };
 
 function mapPathAndStatsToFile(
@@ -44,7 +34,7 @@ function mapPathAndStatsToFile(
     isDirectory: false,
     size: stats.size,
     mime: mime.lookup(filePath),
-    url: "TODO"
+    url: `http://localhost:8000/fs${filePath}`
   };
 }
 
