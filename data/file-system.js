@@ -34,7 +34,7 @@ function mapPathAndStatsToFile(
     isDirectory: false,
     size: stats.size,
     mime: mime.lookup(filePath),
-    url: "TODO"
+    url: `http://localhost:8000/fs${filePath}`
   };
 }
 
