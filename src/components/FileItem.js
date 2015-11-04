@@ -25,15 +25,10 @@ const styles = StyleSheet.create({
 });
 
 class FileItem extends Component {
-  handlePress() {
-    const {onSelect, file} = this.props;
-    onSelect(file);
-  }
-
   render(): Component {
-    const {file} = this.props;
+    const {file, onSelect} = this.props;
     return (
-      <Text style={styles.cell} onPress={this.handlePress.bind(this)}>
+      <Text style={styles.cell} onPress={() => onSelect(file)}>
         <Text style={styles.icon}>{file.isDirectory ? "DIR " : null}</Text>
         <Text style={styles.title}>{file.name}</Text>
       </Text>

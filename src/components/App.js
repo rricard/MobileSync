@@ -24,17 +24,20 @@ export default class App extends Component {
     return (
       <Navigator
         initialRoute={null}
-        renderScene={(route, navigator) => {
-          return <Relay.RootContainer
+        renderScene={(navigatorRoute, navigator) =>
+          <Relay.RootContainer
             Component={FileList}
-            route={route ? new DirectoryRoute({fileID: route}) : new RootRoute()}
-            renderFetched={(data) => (
-              <FileList route={route}
+            route={navigatorRoute ?
+              new DirectoryRoute({fileID: navigatorRoute}) :
+              new RootRoute()}
+            renderFetched={(graphqlResolutionData) =>
+              <FileList route={navigatorRoute}
                         onBack={() => navigator.pop()}
-                        onSelect={({id}) => navigator.push(id)}
-                        {...data} />
-            )}/>
-        }} />
+                        onSelect={({id: newNavigatorRoute}) =>
+                          navigator.push(newNavigatorRoute)}
+                        {...graphqlResolutionData} />
+            }/>
+        }/>
     );
   }
 }
