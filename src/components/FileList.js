@@ -12,6 +12,7 @@ import React, {
 import Relay from "react-relay";
 
 import FileItem from "./FileItem.js";
+import TopBar from "./TopBar.js";
 
 type FileListProps = {
   file: any,
@@ -22,24 +23,8 @@ type FileListProps = {
 const styles = StyleSheet.create({
   frame: {
     backgroundColor: "white",
-    flexDirection: "column"
-  },
-  topBar: {
-    paddingTop: 20,
-    height: 60,
-    backgroundColor: "rgb(250,250,250)",
-    flexDirection: "row"
-  },
-  backButton: {
-    fontSize: 20,
-    color: "rgb(10,100,250)",
-    alignSelf: "center"
-  },
-  title: {
-    fontSize: 20,
-    alignSelf: "center",
-    flex: 1,
-    textAlign: "center"
+    flexDirection: "column",
+    flex: 1
   },
   list: {
     flex: 1
@@ -58,19 +43,15 @@ class FileList extends Component {
   }
 
   render() {
+    const {onSelect} = this.props;
     return (
       <View style={styles.frame}>
-        <View style={styles.topBar}>
-          {this.props.route ?
-            <Text style={styles.backButton} onPress={this.props.onBack}>&lt;Back</Text> :
-            null}
-          <Text style={styles.title}>{this.props.file.name}</Text>
-        </View>
+        <TopBar {...this.props} />
         <ListView
           dataSource={this.state.dataSource}
           renderRow={(rowData) => (
             <FileItem file={rowData.node}
-                      onSelect={this.props.onSelect}/>
+                      onSelect={onSelect}/>
           )}
           style={styles.list} />
       </View>
@@ -83,7 +64,7 @@ export default Relay.createContainer(FileList, {
     file: () => Relay.QL`
       fragment on File {
         id
-        name
+        ${TopBar.getFragment('file')}
 
         children(first: 10) {
           edges {
