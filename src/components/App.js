@@ -9,7 +9,7 @@ import React, {
 
 import Relay from "react-relay";
 
-import FileList from "./FileList.js";
+import Dispatcher from "./Dispatcher.js";
 import DirectoryRoute from "../routes/DirectoryRoute.js";
 import RootRoute from "../routes/RootRoute.js";
 
@@ -26,16 +26,16 @@ export default class App extends Component {
         initialRoute={null}
         renderScene={(navigatorRoute, navigator) =>
           <Relay.RootContainer
-            Component={FileList}
+            Component={Dispatcher}
             route={navigatorRoute ?
               new DirectoryRoute({fileID: navigatorRoute}) :
               new RootRoute()}
             renderFetched={(graphqlResolutionData) =>
-              <FileList route={navigatorRoute}
-                        onBack={() => navigator.pop()}
-                        onSelect={({id: newNavigatorRoute}) =>
-                          navigator.push(newNavigatorRoute)}
-                        {...graphqlResolutionData} />
+              <Dispatcher route={navigatorRoute}
+                          onBack={() => navigator.pop()}
+                          onSelect={({id: newNavigatorRoute}) =>
+                            navigator.push(newNavigatorRoute)}
+                          {...graphqlResolutionData} />
             }/>
         }/>
     );

@@ -45,16 +45,12 @@ class FileList extends Component {
   render() {
     const {onSelect} = this.props;
     return (
-      <View style={styles.frame}>
-        <TopBar {...this.props} />
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => (
-            <FileItem file={rowData.node}
-                      onSelect={onSelect}/>
-          )}
-          style={styles.list} />
-      </View>
+      <ListView dataSource={this.state.dataSource}
+                renderRow={(rowData) => (
+                  <FileItem file={rowData.node}
+                            onSelect={onSelect}/>
+                )}
+                style={styles.list} />
     );
   }
 }
