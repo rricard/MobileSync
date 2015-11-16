@@ -29,8 +29,8 @@ class FileItem extends Component {
     const {file, onSelect} = this.props;
     return (
       <Text style={styles.cell} onPress={() => onSelect(file)}>
-        <Text style={styles.icon}>{file.isDirectory ? "DIR " : null}</Text>
-        <Text style={styles.title}>{file.name}</Text>
+      <Text style={styles.icon}>{file.isDirectory ? "DIR " : null}</Text>
+      <Text style={styles.title}>{file.name}</Text>
       </Text>
     );
   }
