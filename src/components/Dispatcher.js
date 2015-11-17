@@ -3,7 +3,6 @@
 
 import React, {
   View,
-  Text,
   Component,
   StyleSheet
 } from "react-native";
@@ -11,15 +10,24 @@ import React, {
 import Relay from "react-relay";
 import TopBar from "./TopBar.js";
 import FileList from "./FileList.js";
+import FileViewer from "./FileViewer"
+
+var styles = StyleSheet.create({
+  centralContainer: {
+    flex: 1,
+  }
+});
 
 class Dispatcher extends Component {
   render() {
     return(
-      <View>
+      <View style={styles.centralContainer}>
         <TopBar {...this.props} />
-        {this.props.file.isDirectory ?
-          <FileList {...this.props} /> :
-          <Text>Not a directory</Text>}
+        <View style={styles.centralContainer}>
+          {this.props.file.isDirectory ?
+            <FileList {...this.props} /> :
+            <FileViewer {...this.props} />}
+        </View>
       </View>
     )
   }
@@ -32,6 +40,7 @@ export default Relay.createContainer(Dispatcher, {
         isDirectory,
         ${TopBar.getFragment('file')}
         ${FileList.getFragment('file')}
+        ${FileViewer.getFragment('file')}
       }
     `
   }
