@@ -22,4 +22,8 @@ export default class Cache {
       return text;
     });
   }
+
+  invalidate(){
+    this.cache={};
+  }
 }

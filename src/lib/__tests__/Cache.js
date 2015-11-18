@@ -27,4 +27,15 @@ describe('Cache', function() {
       });
     });
   });
+  describe('fetch and invalidate', function(){
+    it('should fetch the second url after the cache was invalidate',function(done){
+      this.cache.fetch("ID","URL1")
+      .then(() => this.cache.invalidate())
+      .then(() => this.cache.fetch("ID","URL2"))
+      .then(text => {
+        expect(text).toBe("URL2")
+        done();
+      });
+      });
+  })
 });
