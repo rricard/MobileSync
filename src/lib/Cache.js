@@ -23,7 +23,7 @@ export default class Cache {
     });
   }
 
-  invalidate(){
-    this.cache={};
+  invalidate(id: ?string): void{
+    id ? delete this.cache[id] : this.cache={};
   }
 }

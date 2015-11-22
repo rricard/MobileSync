@@ -9,7 +9,7 @@
     "data-develop": "nodemon data/index.js",
     "develop": "npm run data-develop & npm run ui-start",
     "data-test": "mocha --compilers js:babel/register --recursive -r co-mocha data/tests",
-    "ui-test": "jest",
+    "ui-test": "mocha --compilers js:babel/register --recursive -r co-mocha src/lib/tests",
     "test": "npm run data-test && npm run ui-test",
     "lint": "eslint .",
     "postinstall": "sh ./relay-patcher/patch.sh"
