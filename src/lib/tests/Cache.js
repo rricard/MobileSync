@@ -12,63 +12,38 @@ describe('Cache', function() {
   });
 
   describe('cacheFetch', function() {
-    it('should fetch the url properly for the first time', function(done) {
-      this.cache.fetch("ID","URL1")
-      .then(res=> {
-        setTimeout(()=> {
-          assert.equal(res,"URL1");
-          done();
-        });
-      });
+    it('should fetch the url properly for the first time', function*() {
+      const res = yield this.cache.fetch("ID","URL1");
+      assert.equal(res,"URL1");
     });
 
-    it('should fetch the first url properly for the second time', function(done) {
-      this.cache.fetch("ID","URL1")
-      .then(() => this.cache.fetch("ID","URL2"))
-      .then(text => {
-        setTimeout(()=> {
-          assert.equal(text,"URL1");
-          done();
-        });
-      })
+    it('should fetch the first url properly for the second time', function*() {
+      yield this.cache.fetch("ID","URL1")
+      const res = yield this.cache.fetch("ID","URL2")
+      assert.equal(res,"URL1");
     });
 
-    it('should fetch the second url after the cache was invalidate',function(done){
-      this.cache.fetch("ID","URL1")
-      .then(() => this.cache.invalidate())
-      .then(() => this.cache.fetch("ID","URL2"))
-      .then(text => {
-        setTimeout(()=> {
-          assert.equal(text,"URL2");
-          done();
-        });
-      });
+    it('should fetch the second url after the cache was invalidate',function*(){
+      yield this.cache.fetch("ID","URL1");
+      this.cache.invalidate();
+      const res = yield this.cache.fetch("ID","URL2");
+      assert.equal(res,"URL2");
     });
 
-    it('should invalidate a specific id',function(done){
-      this.cache.fetch("ID","URL1")
-      .then(() => this.cache.invalidate("ID"))
-      .then(() => this.cache.fetch("ID","URL2"))
-      .then(text => {
-        setTimeout(()=> {
-          assert.equal(text,"URL2");
-          done();
-        });
-      });
+    it('should invalidate a specific id',function*(){
+      yield this.cache.fetch("ID","URL1");
+      this.cache.invalidate("ID");
+      const res = yield this.cache.fetch("ID","URL2");
+      assert.equal(res,"URL2");
     });
 
-    it('should not invalidate all the cache when invalidate was called with a specific id',function(done){
+    it('should not invalidate all the cache when invalidate was called with a specific id',function*(){
 
-      this.cache.fetch("ID1","URL1")
-      .then(()=> this.cache.fetch("ID2","URL2"))
-      .then(() => this.cache.invalidate("ID1"))
-      .then(() => this.cache.fetch("ID2","URL4"))
-      .then(text => {
-        setTimeout(()=> {
-          assert.equal(text,"URL2");
-          done();
-        });
-      })
+      yield this.cache.fetch("ID1","URL1");
+      yield this.cache.fetch("ID2","URL2");
+      this.cache.invalidate("ID1");
+      const res = yield this.cache.fetch("ID2","URL4");
+      assert.equal(res,"URL2");
     });
 });
 });

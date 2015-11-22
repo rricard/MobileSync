@@ -8,8 +8,8 @@
     "start": "npm run data-start & npm run ui-start",
     "data-develop": "nodemon data/index.js",
     "develop": "npm run data-develop & npm run ui-start",
-    "data-test": "mocha --compilers js:babel/register --recursive -r co-mocha data/tests",
-    "ui-test": "mocha --compilers js:babel/register --recursive -r co-mocha src/lib/tests",
+    "data-test": "mocha --compilers js:babel/register --recursive -r co-mocha data/tests src/lib/tests",
+    "ui-test": "jest",
     "test": "npm run data-test && npm run ui-test",
     "lint": "eslint .",
     "postinstall": "sh ./relay-patcher/patch.sh"
