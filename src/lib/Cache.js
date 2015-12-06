@@ -1,29 +1,30 @@
 /* @flow */
 'use strict';
 
-export default class Cache {
-  cache: {[key: string]: string};
+import React,{
+  AsyncStorage
+} from "react-native";
 
-  constructor() {
-    this.cache = {};
-  }
+export default function Cache() {};
+Cache.fetch=(url)=> {
+  return AsyncStorage.getItem(url).then(res=>{
+  console.log(res);
+  return res?
+    res :
+    Cache._fetchAndCache(url);
+  });
+};
 
-  fetch(id: string, url: string): Promise<string> {
-    return this.cache[id] ?
-      Promise.resolve(this.cache[id]) :
-      this._fetchAndCache(id,url);
-  }
+Cache._fetchAndCache=( url)=> {
+  const result= fetch(url)
+  .then(res => res.text())
+  .then(text => {
+    console.log(url);
+    AsyncStorage.setItem(url,text);
+    return text;
+  })
+};
 
-  _fetchAndCache(id: string, url: string): Promise<string> {
-    return fetch(url)
-    .then(res => res.text())
-    .then(text => {
-      this.cache[id] = text;
-      return text;
-    });
-  }
-
-  invalidate(id: ?string): void{
-    id ? delete this.cache[id] : this.cache={};
-  }
-}
+Cache.invalidate=(id)=>{
+  id ? AsyncStorage.removeItem(id) : AsyncStorage.clear();
+};
