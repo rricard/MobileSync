@@ -5,26 +5,26 @@ import React,{
   AsyncStorage
 } from "react-native";
 
-export default function Cache() {};
-Cache.fetch=(url)=> {
+
+export function fetchWithCache(url) {
   return AsyncStorage.getItem(url).then(res=>{
-  console.log(res);
-  return res?
-    res :
-    Cache._fetchAndCache(url);
+    return res?
+      res :
+      _fetchThenCache(url);
   });
 };
 
-Cache._fetchAndCache=( url)=> {
-  const result= fetch(url)
+function _fetchThenCache(url) {
+  const result = fetch(url)
   .then(res => res.text())
   .then(text => {
-    console.log(url);
     AsyncStorage.setItem(url,text);
     return text;
-  })
+  });
 };
 
-Cache.invalidate=(id)=>{
-  id ? AsyncStorage.removeItem(id) : AsyncStorage.clear();
+export function invalidate(id?: string) {
+  return id ?
+  AsyncStorage.removeItem(id) :
+  AsyncStorage.clear();
 };

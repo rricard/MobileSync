@@ -5,7 +5,7 @@ import React, {
   Text
 } from "react-native";
 
-import Cache from "./../../lib/Cache.js";
+import {fetchWithCache} from "./../../lib/Cache.js";
 
 export default class TextViewer extends Component {
   render() {
@@ -18,9 +18,8 @@ export default class TextViewer extends Component {
     this.state = {
       text: null
     };
-
-  Cache.fetch(this.props.url).then(data => {
+    fetchWithCache(this.props.url).then(data => {
       this.setState({text: data});
-    });
+      });
   }
 }
