@@ -1,24 +1,35 @@
-/* @flow */
+/* @flow weak */
 'use strict';
 
 import React,{
   AsyncStorage
 } from "react-native";
 
-
-export function fetchWithCache(url) {
+/*Look for a URL in cache,
+if not cached yet, or the fil in cache is out of date
+call _fetchThenCache
+*/
+export function fetchWithCache(url, lastModified) {
   return AsyncStorage.getItem(url).then(res=>{
-    return res?
-      res :
-      _fetchThenCache(url);
+    const result=JSON.parse(res);
+    return (!res || new Date(result.lastModified) < new Date(lastModified)) ?
+      _fetchThenCache(url,lastModified):
+      result.file;
   });
 };
 
-function _fetchThenCache(url) {
-  const result = fetch(url)
+/* Fetch a file from an url then
+  cache this file with his lastModified date.
+*/
+function _fetchThenCache(url,lastModified) {
+  return fetch(url)
   .then(res => res.text())
   .then(text => {
-    AsyncStorage.setItem(url,text);
+    const cacheObject = {
+      file : text,
+      lastModified : lastModified
+    };
+    AsyncStorage.setItem(url,JSON.stringify(cacheObject));
     return text;
   });
 };

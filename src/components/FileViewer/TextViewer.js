@@ -18,7 +18,7 @@ export default class TextViewer extends Component {
     this.state = {
       text: null
     };
-    fetchWithCache(this.props.url).then(data => {
+    fetchWithCache(this.props.url, this.props.lastModified).then(data => {
       this.setState({text: data});
       });
   }
