@@ -9,6 +9,7 @@ import {
   GraphQLBoolean,
   GraphQLNonNull,
   GraphQLInt,
+  GraphQLDate,
   GraphQLID
 } from 'graphql';
 
@@ -56,6 +57,11 @@ const FileType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLBoolean),
       description: "Defines if the file descriptor is in fact a directory",
       resolve: (file) => file.isDirectory
+    },
+    lastModified: {
+        type: GraphQLString,
+        description: "Defines the time the file/directory was modified for the last time",
+        resolve: (file) => file.lastModified.toISOString()
     },
     size: {
       type: GraphQLInt,
