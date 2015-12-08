@@ -39,6 +39,7 @@ export default Relay.createContainer(FileViewer, {
     file: () => Relay.QL`
       fragment on File {
         url,
+        name,
         lastModified
       }
     `
