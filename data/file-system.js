@@ -15,6 +15,7 @@ type File = {
   id: string,
   name: string,
   isDirectory: boolean,
+  lastModified: Date,
   size?: number,
   mime?: string,
   url?: string
@@ -24,15 +25,18 @@ function mapPathAndStatsToFile(
   {filePath, stats}: {filePath: string, stats: any}
 ): File {
   const name = path.parse(filePath).base;
+  const actualDate = new Date(stats.mtime);
   return stats.isDirectory() ? {
     id: filePath,
     name: name,
-    isDirectory: true
+    isDirectory: true,
+    lastModified: stats.mtime ? new Date(stats.mtime) : actualDate
   } : {
     id: filePath,
     name: name,
     isDirectory: false,
     size: stats.size,
+    lastModified: stats.mtime ? new Date(stats.mtime) : actualDate,
     mime: mime.lookup(filePath),
     url: `http://localhost:8000/fs${filePath}`
   };

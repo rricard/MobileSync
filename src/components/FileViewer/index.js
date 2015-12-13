@@ -30,7 +30,7 @@ class FileViewer extends Component {
   render() {
     const {file} = this.props;
     const ViewerComponent = matchViewerComponent(file);
-    return (<ViewerComponent url={file.url} />);
+    return (<ViewerComponent {...file} />);
   }
 }
 
@@ -40,6 +40,7 @@ export default Relay.createContainer(FileViewer, {
       fragment on File {
         url,
         name,
+        lastModified
       }
     `
   }

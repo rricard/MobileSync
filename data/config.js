@@ -7,9 +7,9 @@ export const FS_PATH = path.join(
   "..",
   process.env.FS_PATH || "./data/example"
 );
-
 export const ROOT_NODE: File = {
   id: "/",
   name: "Root",
-  isDirectory: true
+  isDirectory: true,
+  lastModified: new Date(0)
 };
