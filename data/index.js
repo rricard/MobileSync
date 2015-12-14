@@ -1,6 +1,7 @@
 /* @flow */
 "use strict";
 
+require("babel-polyfill");
 require("babel-register");
 
 // Export the GraphQL Schema at launch

@@ -1,0 +1,20 @@
+{
+  "presets": [
+    "babel-preset-es2015", "babel-preset-react"
+  ],
+  "env": {
+    "production":{
+      "plugins":[
+        "./build-tools/babelRelayPlugin.js",
+        "node-env-inline",
+        "dunderscore-dev-inline"
+      ]
+    },
+    "test":{
+      "plugins":["./build-tools/babelRelayPlugin.js",{
+        "position": "after",
+        "transformer": "inlineRequires"
+      }]
+    }
+  }
+}

@@ -1,27 +1,10 @@
 {
   "name": "MobileSync",
   "version": "0.0.1",
-  "babel":{
-    "presets": ["babel-preset-es2015","babel-preset-react"],
-    "retainLines": true,
-    "compact": true,
-    "comments": false,
-    "env": {
-      "production":{
-        "plugins":["babel-relay-plugin","node-env-inline", "dunderscore-dev-inline"]
-      },
-      "test":{
-        "plugins":["babel-relay-plugin",{
-          "position": "after",
-          "transformer": "inlineRequires"
-        }]
-      }
-    }
-  },
   "private": true,
   "scripts": {
     "data-start": "node data/index.js",
-    "ui-start": "./node_modules/react-native/packager/packager.sh --cleanCache --root ./src --transformer ./node_modules/react-native/packager/transformer.js",
+    "ui-start": "./node_modules/react-native/packager/packager.sh --cleanCache --root ./src",
     "start": "npm run data-start & npm run ui-start",
     "data-develop": "nodemon data/index.js",
     "develop": "npm run data-develop & npm run ui-start",
@@ -33,11 +16,12 @@
   },
   "dependencies": {
     "babel": "^6.0.0",
-    "babel-relay-plugin": "^0.6.0",
-    "babel-runtime": "^6.0.0",
-    "babel-register": "^6.3.13",
+    "babel-polyfill": "^6.3.14",
     "babel-preset-es2015": "^6.1.0",
     "babel-preset-react": "^6.1.18",
+    "babel-register": "^6.3.13",
+    "babel-relay-plugin": "^0.6.0",
+    "babel-runtime": "^6.0.0",
     "bluebird": "^2.10.2",
     "co": "^4.6.0",
     "express": "^4.13.3",
@@ -55,7 +39,6 @@
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-jest": "^6.0.0",
-    "babel-loader": "^6.2.0",
     "co-mocha": "^1.1.2",
     "eslint": "^1.6.0",
     "eslint-plugin-flowtype": "^1.0.0",
