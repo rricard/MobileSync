@@ -6,6 +6,7 @@ cp -f ./node_modules/react-relay/node_modules/fbjs/lib/fetch.js ./node_modules/r
 cp -f ./node_modules/react-relay/lib/RelayContainer.js ./node_modules/react-relay/lib/RelayContainer.js.backup
 cp -f ./node_modules/react-relay/lib/RelayPropTypes.js ./node_modules/react-relay/lib/RelayPropTypes.js.backup
 cp -f ./node_modules/react-relay/lib/RelayRootContainer.js ./node_modules/react-relay/lib/RelayRootContainer.js.backup
+cp -f ./node_modules/react-relay/lib/RelayRenderer.js ./node_modules/react-relay/lib/RelayRenderer.js.backup
 rm ./node_modules/react-relay/node_modules/fbjs/lib/fetchWithRetries.js
 rm ./node_modules/react-relay/lib/RelayContainer.js
 rm ./node_modules/react-relay/lib/RelayPropTypes.js
@@ -18,3 +19,4 @@ sed "s/'react'/'react-native'/g" < ./node_modules/react-relay/lib/RelayContainer
 sed "s/'react'/'react-native'/g" < ./node_modules/react-relay/lib/RelayPropTypes.js.backup > ./node_modules/react-relay/lib/RelayPropTypes.js
 sed "s/'react'/'react-native'/g" < ./node_modules/react-relay/lib/RelayRootContainer.js.backup > ./node_modules/react-relay/lib/RelayRootContainer.js
 sed "s/ fetch(/ fetch.fetch(/g" < ./node_modules/react-relay/node_modules/fbjs/lib/fetchWithRetries.js.backup > ./node_modules/react-relay/node_modules/fbjs/lib/fetchWithRetries.js
+sed "s/ fetch(/ fetch.fetch(/g" < ./node_modules/react-relay/lib/RelayRenderer.js.backup > ./node_modules/react-relay/lib/RelayRenderer.js
