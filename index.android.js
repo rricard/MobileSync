@@ -1,1 +1,1 @@
-module.exports = require("./src/index.android.js");
+require("./src/index.android.js");
