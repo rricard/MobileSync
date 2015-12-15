@@ -32,7 +32,8 @@ File [
                name: String!
                isDirectory: Boolean!
                size: Int
-               url: String}"
+               url: String
+               isActive: Boolean}"
 ]
 File -> FileConnection [label = "children(...pagination)"]
 

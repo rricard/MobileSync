@@ -25,7 +25,8 @@ FileDescriptor [
                            size:integer
                            createdAt:date
                            updatedAt:date
-                           isDirectory:boolean}"
+                           isDirectory:boolean
+                           isActive:boolean}"
 ]
 
 Permission [
